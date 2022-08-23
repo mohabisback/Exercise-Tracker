@@ -1,3 +1,4 @@
+import path from 'path'
 import express from 'express'
 import cors from 'cors'
 import logsRouter from './api/logsRouter.js'
@@ -45,8 +46,9 @@ app.use('/api/users', usersRouter)
 
 app.listen(5000, ()=>{console.log('Server Listening, Port 5000')})
 
+const __dirname = path.resolve();
 app.get('/',(req, res)=>{
-  res.status(200).sendFile('index.html')
+  res.status(200).sendFile(__dirname + '/public/index.html')
 })
 app.all('*', (req, res)=>{
   res.status(404).send({error: 'page not found'});
